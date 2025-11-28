@@ -2,15 +2,17 @@ package com.asafeorneles.cadastro_pets_crud.controllers;
 
 import com.asafeorneles.cadastro_pets_crud.dtos.PetRecordDto;
 import com.asafeorneles.cadastro_pets_crud.entities.Pet;
+import com.asafeorneles.cadastro_pets_crud.queryFilters.PetQueryFilters;
 import com.asafeorneles.cadastro_pets_crud.services.PetService;
+import com.asafeorneles.cadastro_pets_crud.specifications.PetSpecification;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,8 +28,8 @@ public class PetController {
     }
 
     @GetMapping("/pets")
-    public ResponseEntity<List<Pet>> findAllPets(){
-        List<Pet> petsFound = petService.findAllPets();
+    public ResponseEntity<List<Pet>> findAllPets(PetQueryFilters filters){
+        List<Pet> petsFound = petService.findAllPets(filters.toSpecification());
         return ResponseEntity.status(HttpStatus.OK).body(petsFound);
     }
 
@@ -38,7 +40,7 @@ public class PetController {
     }
 
     @GetMapping("/pets/name")
-    public ResponseEntity<List<Pet>> findPetByEmail(@RequestParam String name){
+    public ResponseEntity<List<Pet>> findPetByName(@RequestParam String name){
         List<Pet> pets = petService.findByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(pets);
     }

@@ -24,7 +24,7 @@ public class Pet {
     @Enumerated(EnumType.STRING)
     private Tipo type;
 
-    @Enumerated(EnumType.STRING) // O JPA controla como o valor é salvo, na tavela fica o ENUM de fato.
+    @Enumerated(EnumType.STRING) // O JPA controla como o valor é salvo, na tabela fica o ENUM de fato.
     private Sexo sexo;
 
     private String name;

@@ -6,7 +6,9 @@ import com.asafeorneles.cadastro_pets_crud.exceptions.PetNotFoundException;
 import com.asafeorneles.cadastro_pets_crud.repositories.PetReposirory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -22,8 +24,8 @@ public class PetService {
         return petReposirory.save(pet);
     }
 
-    public List<Pet> findAllPets(){
-        List<Pet> pets = petReposirory.findAll();
+    public List<Pet> findAllPets(Specification<Pet> specification){
+        List<Pet> pets = petReposirory.findAll(specification);
         if (pets.isEmpty()){
             throw new PetNotFoundException("Pets not found"); // Talvez falar que nenhum pet foi cadastrado no sistema
         }
