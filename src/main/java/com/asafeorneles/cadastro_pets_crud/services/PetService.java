@@ -2,6 +2,7 @@ package com.asafeorneles.cadastro_pets_crud.services;
 
 import com.asafeorneles.cadastro_pets_crud.dtos.PetRecordDto;
 import com.asafeorneles.cadastro_pets_crud.entities.Pet;
+import com.asafeorneles.cadastro_pets_crud.exceptions.PetNotFoundException;
 import com.asafeorneles.cadastro_pets_crud.repositories.PetReposirory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class PetService {
 
     public Pet findById (UUID id){
         return petReposirory.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pet not found"));
+                .orElseThrow(() -> new PetNotFoundException("Pet not found"));
+    }
+    public Pet updatePet (UUID id, PetRecordDto petRecordDto){
+        Pet petFound = petReposirory.findById(id).orElseThrow(() -> new PetNotFoundException("Pet not found"));
+        BeanUtils.copyProperties(petRecordDto, petFound);
+        return petReposirory.save(petFound);
     }
 }

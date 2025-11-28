@@ -37,5 +37,9 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(pet);
     }
 
-
+    @PutMapping("/pets/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable(value = "id") UUID id, @RequestBody @Valid PetRecordDto petRecordDto){
+        Pet pet = petService.updatePet(id, petRecordDto);
+        return ResponseEntity.status(HttpStatus.OK).body(pet);
+    }
 }
