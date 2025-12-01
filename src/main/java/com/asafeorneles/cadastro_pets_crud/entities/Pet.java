@@ -13,12 +13,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode (onlyExplicitlyIncluded = true)
 
 @Entity
 @Table(name = "TB_PETS")
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // De 1 ao infinito
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Enumerated(EnumType.STRING)
