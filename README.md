@@ -29,7 +29,7 @@ O objetivo deste projeto é:
 - Realizar conexão da aplicação com **MySQL via Docker**
 - Aplicar **Specifications** para buscas avançadas com filtros
 - Criar **testes unitários** utilizando Mockito e JUnit
-- Evoluir um desafio inicial de cadastro para um sistema robusto e organizado
+- Evoluir um projeto inicial de cadastro para um sistema robusto e organizado
 
 ---
 
